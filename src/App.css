@@ -7,6 +7,56 @@
   pointer-events: none;
 }
 
+.main {
+  display: flex;
+  flex-direction: column;
+  margin-left: 100px;
+  margin-top: 50px;
+}
+
+.option {
+  display: flex;
+  flex-direction: column;
+  width: 250px;
+  font-size: small;
+}
+
+.country-code {
+  margin-top: 20px;
+  font-size: small;
+}
+
+#code {
+  border: 1px solid black;
+  width: 70px;
+  height: 20px;
+}
+
+.number {
+  /* border: 2px solid black; */
+  width: 150px;
+  height: 20px;
+  font-size: small;
+}
+
+.country-code-design {
+  display: flex;
+  gap: 10px;
+}
+
+.button-print {
+  margin-top: 20px;
+  margin-left: 80px;
+}
+
+#print-number {
+  border: 1px solid black;
+  width: 150px;
+  height: 20px;
+  margin-top: 10px;
+  margin-left: 30px;
+}
+
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
@@ -32,6 +82,7 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
