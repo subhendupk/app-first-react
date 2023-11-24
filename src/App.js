@@ -1,11 +1,14 @@
 import "./App.css";
+import SignUpForm from "./components/SignUpForm";
 import AjaxToReact from "./pages/AjaxtoReact";
 import StudentList from "./pages/StudentList";
 
 function App() {
-  let condition = 2
-  return condition === 1?<AjaxToReact />: <StudentList />
-    
+  // let condition = 2
+  return (
+    <SignUpForm />
+  )
+
 }
 
 export default App;
