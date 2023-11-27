@@ -27,6 +27,7 @@ const SignUpForm = () => {
         }
         else {
             setStudentList((currentArray) => {
+                newStudent["id"] = currentArray.length + 1;
                 currentArray.push(newStudent);
                 return [...currentArray]
             });
@@ -51,10 +52,29 @@ const SignUpForm = () => {
         seteditShow(true);
     }
     const updateStudent = () => {
+        studentList.map((student, index) => {
+            if (student.id === selectedStudent.id) {
+                setStudentList((currentdata) => {
+                    currentdata[index] = selectedStudent;
+                    return [...currentdata];
+                })
+                updateCloseForm();
 
+            }
+            else {
+                alert("Can't Update");
+            }
+        });
     }
     const updateCloseForm = () => {
-
+        seteditShow(false);
+        setName('');
+        setEmail('');
+        setPhone('');
+        setStreetOne('');
+        setStreetTwo('');
+        setCity('');
+        setPin('');
     }
 
     return (
@@ -91,6 +111,7 @@ const SignUpForm = () => {
                     </tbody>
                 </table>
                 {(!show ?
+
                     <button type="submit" className="btn btn-outline-success btn-primary" onClick={showStudentForm} style={{ color: "white", marginBottom: '20px' }}>Add</button>
                     :
                     <div className="myForm">
@@ -137,38 +158,81 @@ const SignUpForm = () => {
                         <div className="row" style={{ marginBottom: '20px' }}>
                             <div className="col">
                                 <label htmlFor="inputEmail4" className="form-label">Name</label>
-                                <input type="text" className="form-control" placeholder="Enter Name" value={selectedStudent.name} required />
+                                <input type="text" className="form-control" placeholder="Enter Name" value={selectedStudent.name} required
+                                    onChange={(event) => {
+                                        setSelectedStudent((currentValue) => {
+                                            return { ...currentValue, ...{ name: event.target.value } };
+                                        })
+                                    }}
+                                />
                             </div>
                             <div className="col">
                                 <label htmlFor="inputEmail4" className="form-label">Email</label>
-                                <input type="email" className="form-control" placeholder="Enter Email" value={selectedStudent.email} required />
+                                <input type="email" className="form-control" placeholder="Enter Email" value={selectedStudent.email} required
+                                    onChange={(event) => {
+                                        setSelectedStudent(currentValue => {
+                                            return { ...currentValue, ...{ email: event.target.value } }
+                                        })
+                                    }}
+                                />
                             </div>
                         </div>
                         <div className="row" style={{ marginBottom: '20px' }}>
                             <div className="col">
                                 <label htmlFor="inputEmail4" className="form-label">Phone</label>
-                                <input type="number" className="form-control" placeholder="Enter Number" value={selectedStudent.phone} required />
+                                <input type="number" className="form-control" placeholder="Enter Number" value={selectedStudent.phone} required
+                                    onChange={(event) => {
+                                        setSelectedStudent(currentValue => {
+                                            return { ...currentValue, ...{ phone: event.target.value } }
+                                        });
+                                    }}
+                                />
                             </div>
                             <div className="col">
                                 <label htmlFor="inputEmail4" className="form-label">Address Street 1</label>
-                                <input type="text" className="form-control" placeholder="Enter Address Street 1" value={selectedStudent.streetOne} />
+                                <input type="text" className="form-control" placeholder="Enter Address Street 1" value={selectedStudent.streetOne}
+                                    onChange={(event) => {
+                                        setSelectedStudent(currentValue => {
+                                            return { ...currentValue, ...{ streetOne: event.target.value } }
+                                        });
+                                    }}
+                                />
                             </div>
                             <div className="col">
                                 <label htmlFor="inputEmail4" className="form-label">Address Street 2</label>
-                                <input type="text" className="form-control" placeholder="Enter Address Street 2" value={selectedStudent.streetTwo} />
+                                <input type="text" className="form-control" placeholder="Enter Address Street 2" value={selectedStudent.streetTwo}
+                                    onChange={(event) => {
+                                        setSelectedStudent(currentValue => {
+                                            return { ...currentValue, ...{ streetTwo: event.target.value } }
+                                        });
+                                    }}
+                                />
                             </div>
                         </div>
                         <div className="row" style={{ marginBottom: '20px' }}>
                             <div className="col">
                                 <label htmlFor="inputEmail4" className="form-label">City</label>
-                                <input type="text" className="form-control" placeholder="Enter City" value={selectedStudent.city} />
+                                <input type="text" className="form-control" placeholder="Enter City" value={selectedStudent.city}
+                                    onChange={(event) => {
+                                        setSelectedStudent(currentValue => {
+                                            return { ...currentValue, ...{ city: event.target.value } }
+                                        });
+                                    }}
+
+                                />
                             </div>
                             <div className="col">
                                 <label htmlFor="inputEmail4" className="form-label">PinCode</label>
-                                <input type="number" className="form-control" placeholder="Enter Pincode" value={selectedStudent.pin} />
+                                <input type="number" className="form-control" placeholder="Enter Pincode" value={selectedStudent.pin}
+                                    onChange={(event) => {
+                                        setSelectedStudent(currentValue => {
+                                            return { ...currentValue, ...{ pin: event.target.value } }
+                                        });
+                                    }}
+                                />
                             </div>
                         </div>
-                        <button type="button" className="btn btn-success" style={{ marginRight: '10px' }} onClick={updateStudent}>Submit</button>
+                        <button type="button" className="btn btn-success" style={{ marginRight: '10px' }} onClick={updateStudent}>Update</button>
                         <button type="button" className="btn btn-danger" onClick={updateCloseForm}>Cancel</button>
                     </div>
                 ) : null}
