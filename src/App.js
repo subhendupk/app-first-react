@@ -6,7 +6,7 @@ import StudentList from "./pages/StudentList";
 function App() {
   // let condition = 2
   return (
-    <SignUpForm />
+    <StudentList />
   )
 
 }
