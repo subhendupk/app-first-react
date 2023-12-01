@@ -1,4 +1,5 @@
 import { useState } from "react";
+import AddStudent from "../pages/addstudent";
 
 const SignUpForm = () => {
     const [name, setName] = useState('');
@@ -22,7 +23,7 @@ const SignUpForm = () => {
         else if (!emailVal.test(newStudent.email)) {
             alert('Please Enter Valid  Email');
         }
-        else if (newStudent.phone.length !== 10 || !(newStudent.phone.startsWith('9') || newStudent.phone.startsWith('8') || newStudent.phone.startsWith('7') || newStudent.pheditshowone.startsWith('6'))) {
+        else if (newStudent.phone.length !== 10 || !(newStudent.phone.startsWith('9') || newStudent.phone.startsWith('8') || newStudent.phone.startsWith('7') || newStudent.phone.startsWith('6'))) {
             alert('Please Enter valid number');
         }
         else {
@@ -114,44 +115,7 @@ const SignUpForm = () => {
 
                     <button type="submit" className="btn btn-outline-success btn-primary" onClick={showStudentForm} style={{ color: "white", marginBottom: '20px' }}>Add</button>
                     :
-                    <div className="myForm">
-                        <div className="row" style={{ marginBottom: '20px' }}>
-                            <div className="col">
-                                <label htmlFor="inputEmail4" className="form-label">Name</label>
-                                <input type="text" className="form-control" placeholder="Enter Name" onChange={(e) => { setName(e.target.value) }} required />
-                            </div>
-                            <div className="col">
-                                <label htmlFor="inputEmail4" className="form-label">Email</label>
-                                <input type="email" className="form-control" placeholder="Enter Email" onChange={(e) => { setEmail(e.target.value) }} required />
-                            </div>
-                        </div>
-                        <div className="row" style={{ marginBottom: '20px' }}>
-                            <div className="col">
-                                <label htmlFor="inputEmail4" className="form-label">Phone</label>
-                                <input type="number" className="form-control" placeholder="Enter Number" onChange={(e) => { setPhone(e.target.value) }} required />
-                            </div>
-                            <div className="col">
-                                <label htmlFor="inputEmail4" className="form-label">Address Street 1</label>
-                                <input type="text" className="form-control" placeholder="Enter Address Street 1" onChange={(e) => { setStreetOne(e.target.value) }} />
-                            </div>
-                            <div className="col">
-                                <label htmlFor="inputEmail4" className="form-label">Address Street 2</label>
-                                <input type="text" className="form-control" placeholder="Enter Address Street 2" onChange={(e) => { setStreetTwo(e.target.value) }} />
-                            </div>
-                        </div>
-                        <div className="row" style={{ marginBottom: '20px' }}>
-                            <div className="col">
-                                <label htmlFor="inputEmail4" className="form-label">City</label>
-                                <input type="text" className="form-control" placeholder="Enter City" onChange={(e) => { setCity(e.target.value) }} />
-                            </div>
-                            <div className="col">
-                                <label htmlFor="inputEmail4" className="form-label">PinCode</label>
-                                <input type="number" className="form-control" placeholder="Enter Pincode" onChange={(e) => { setPin(e.target.value) }} />
-                            </div>
-                        </div>
-                        <button type="button" className="btn btn-success" style={{ marginRight: '10px' }} onClick={studentAdd}>Submit</button>
-                        <button type="button" className="btn btn-danger" onClick={closeForm}>Cancel</button>
-                    </div>
+                   <AddStudent/>
                 )}
                 {editShow ? (
                     <div className="myForm">
