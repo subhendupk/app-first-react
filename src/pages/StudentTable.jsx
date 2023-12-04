@@ -1,7 +1,7 @@
 import { useState } from "react";
 import StudentForm from "./StudentForm";
 import StudentEditForm from "./StudentEditForm";
-
+import 'bootstrap/dist/css/bootstrap.min.css';
 const StudentTable = () => {
     const [studentList, setStudentList] = useState([]);
     const [selectedStudent, setSelectedStudent] = useState(null);
