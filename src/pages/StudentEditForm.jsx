@@ -2,19 +2,23 @@ import { useState } from "react";
 
 const StudentEditForm = ({ selectedStudent, setSelectedStudent, showEditForm, setStudentList, studentList }) => {
     const updateStudent = () => {
+        let isUpdated = false;
         studentList.map((student, index) => {
             if (student.id === selectedStudent.id) {
                 setStudentList((currentdata) => {
                     currentdata[index] = selectedStudent;
                     return [...currentdata];
-                })
-                updateCloseForm();
-
-            }
-            else {
-                alert("Can't Update");
+                });
+                isUpdated = true;
             }
         });
+        if (isUpdated) {
+            alert('Updated Successfully');
+        }
+        else {
+            alert('Not Updated');
+        }
+        updateCloseForm();
     }
 
     const updateCloseForm = () => {

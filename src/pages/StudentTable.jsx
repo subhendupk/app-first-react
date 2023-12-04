@@ -50,7 +50,6 @@ const StudentTable = () => {
                     </tbody>
                 </table>
                 {(!show ?
-
                     <button type="submit" className="btn btn-outline-success btn-primary" onClick={showStudentForm} style={{ color: "white", marginBottom: '20px' }}>Add</button>
                     :
                     <StudentForm setStudentList={setStudentList} hideForm={setShow} />
