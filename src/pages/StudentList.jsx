@@ -1,5 +1,6 @@
 import { useState } from "react";
 import AddStudent from "./AddStudent";
+import SubmitButton from "../components/SubmitButton";
 
 const StudentList = () => {
 
@@ -7,6 +8,7 @@ const StudentList = () => {
   const [selectedStudent, setSelectedStudent] = useState(null);
   const [show, setShow] = useState(false);
   const [editShow, seteditShow] = useState(false);
+  const [submitText, setSubmitText] = useState("Add");
 
   const hideStudentForm = () => {
     setShow(false);
@@ -77,9 +79,10 @@ const StudentList = () => {
             })}
           </tbody>
         </table>
+        <button onClick={() => setSubmitText("Submit")}>change text</button>
         {(!show ?
-
-          <button type="submit" className="btn btn-outline-success btn-primary" onClick={showStudentForm} style={{ color: "white", marginBottom: '20px' }}>Add</button>
+          <SubmitButton onClickHandeler={showStudentForm} name={submitText} className="btn btn-outline-success btn-primary" />
+          // <button type="submit" className="btn btn-outline-success btn-primary" onClick={showStudentForm} style={{ color: "white", marginBottom: '20px' }}>Add</button>
           :
           <AddStudent setStudentList={setStudentList} hideForm={hideStudentForm} />
         )}

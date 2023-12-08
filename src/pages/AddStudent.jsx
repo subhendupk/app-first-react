@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 export default function AddStudent({ setStudentList, hideForm }) {
   const [name, setName] = useState('');
@@ -8,6 +8,16 @@ export default function AddStudent({ setStudentList, hideForm }) {
   const [streetTwo, setStreetTwo] = useState('');
   const [city, setCity] = useState('');
   const [pin, setPin] = useState('');
+  useEffect(() => {
+    console.log("I am mounted: AddStudent");
+    return () => {
+      console.log("I will unmount:AddStudent");
+    }
+  }, []);
+
+  useEffect(() => {
+    console.log("I am updated:AddStudent");
+  }, [name, email]);
 
   const studentAdd = () => {
     const newStudent = { name, email, phone, streetOne, streetTwo, city, pin }
