@@ -1,6 +1,16 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const StudentEditForm = ({ selectedStudent, setSelectedStudent, showEditForm, setStudentList, studentList }) => {
+
+    useEffect(() => {
+        selectedStudent.name || selectedStudent.email || selectedStudent.phone || selectedStudent.streetOne ||
+            selectedStudent.streetTwo || selectedStudent.city || selectedStudent.pin
+
+        return () => {
+            console.log("false");
+        }
+
+    }, [])
     const updateStudent = () => {
         studentList.map((student, index) => {
             if (student.id === selectedStudent.id) {
@@ -14,6 +24,7 @@ const StudentEditForm = ({ selectedStudent, setSelectedStudent, showEditForm, se
             else {
                 alert("Can't Update");
             }
+
         });
     }
 
@@ -29,9 +40,9 @@ const StudentEditForm = ({ selectedStudent, setSelectedStudent, showEditForm, se
                     <div className="col">
                         <label htmlFor="inputEmail4" className="form-label">Name</label>
                         <input type="text"
-                         className="form-control"
-                          placeholder="Enter Name"
-                           value={selectedStudent.name} required
+                            className="form-control"
+                            placeholder="Enter Name"
+                            value={selectedStudent.name} required
                             onChange={(event) => {
                                 setSelectedStudent((currentValue) => {
                                     return { ...currentValue, ...{ name: event.target.value } };
@@ -42,9 +53,9 @@ const StudentEditForm = ({ selectedStudent, setSelectedStudent, showEditForm, se
                     <div className="col">
                         <label htmlFor="inputEmail4" className="form-label">Email</label>
                         <input type="email"
-                         className="form-control"
-                          placeholder="Enter Email"
-                           value={selectedStudent.email} required
+                            className="form-control"
+                            placeholder="Enter Email"
+                            value={selectedStudent.email} required
                             onChange={(event) => {
                                 setSelectedStudent(currentValue => {
                                     return { ...currentValue, ...{ email: event.target.value } }

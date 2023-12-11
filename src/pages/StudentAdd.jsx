@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const StudentAdd = ({ setStudentList, hideForm }) => {
 
@@ -9,6 +9,16 @@ const StudentAdd = ({ setStudentList, hideForm }) => {
     const [streetTwo, setStreetTwo] = useState('');
     const [city, setCity] = useState('');
     const [pin, setPin] = useState('');
+    useEffect(() => {
+        console.log("i am munted");
+        return () => {
+            console.log("i am unmunt");
+        }
+    }, []);
+    useEffect(() => {
+        console.log("i am updated");
+        
+    }, [name,email]);
 
 
     const studentAdd = () => {
@@ -54,55 +64,55 @@ const StudentAdd = ({ setStudentList, hideForm }) => {
                         <div className="col">
                             <label htmlFor="inputEmail4" className="form-label">Name</label>
                             <input type="text"
-                             className="form-control" 
-                             placeholder="Enter Name"
-                              onChange={(e) => { setName(e.target.value) }} required />
+                                className="form-control"
+                                placeholder="Enter Name"
+                                onChange={(e) => { setName(e.target.value) }} required />
                         </div>
                         <div className="col">
                             <label htmlFor="inputEmail4" className="form-label">Email</label>
                             <input type="email"
-                             className="form-control"
-                              placeholder="Enter Email"
-                               onChange={(e) => { setEmail(e.target.value) }} required />
+                                className="form-control"
+                                placeholder="Enter Email"
+                                onChange={(e) => { setEmail(e.target.value) }} required />
                         </div>
                     </div>
                     <div className="row" style={{ marginBottom: '20px' }}>
                         <div className="col">
                             <label htmlFor="inputEmail4" className="form-label">Phone</label>
                             <input type="number"
-                             className="form-control"
-                              placeholder="Enter Number" 
-                              onChange={(e) => { setPhone(e.target.value) }} required />
+                                className="form-control"
+                                placeholder="Enter Number"
+                                onChange={(e) => { setPhone(e.target.value) }} required />
                         </div>
                         <div className="col">
                             <label htmlFor="inputEmail4" className="form-label">Address Street 1</label>
                             <input type="text"
-                             className="form-control"
-                              placeholder="Enter Address Street 1" 
-                              onChange={(e) => { setStreetOne(e.target.value) }} />
+                                className="form-control"
+                                placeholder="Enter Address Street 1"
+                                onChange={(e) => { setStreetOne(e.target.value) }} />
                         </div>
                         <div className="col">
                             <label htmlFor="inputEmail4" className="form-label">Address Street 2</label>
                             <input type="text"
-                             className="form-control"
-                              placeholder="Enter Address Street 2"
-                               onChange={(e) => { setStreetTwo(e.target.value) }} />
+                                className="form-control"
+                                placeholder="Enter Address Street 2"
+                                onChange={(e) => { setStreetTwo(e.target.value) }} />
                         </div>
                     </div>
                     <div className="row" style={{ marginBottom: '20px' }}>
                         <div className="col">
                             <label htmlFor="inputEmail4" className="form-label">City</label>
                             <input type="text"
-                             className="form-control"
-                              placeholder="Enter City"
-                               onChange={(e) => { setCity(e.target.value) }} />
+                                className="form-control"
+                                placeholder="Enter City"
+                                onChange={(e) => { setCity(e.target.value) }} />
                         </div>
                         <div className="col">
                             <label htmlFor="inputEmail4" className="form-label">PinCode</label>
                             <input type="number"
-                             className="form-control" 
-                             placeholder="Enter Pincode" 
-                             onChange={(e) => { setPin(e.target.value) }} />
+                                className="form-control"
+                                placeholder="Enter Pincode"
+                                onChange={(e) => { setPin(e.target.value) }} />
                         </div>
                     </div>
                     <button type="button" className="btn btn-success" style={{ marginRight: '10px' }} onClick={studentAdd}>Submit</button>
