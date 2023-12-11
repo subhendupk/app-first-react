@@ -8,7 +8,7 @@ const StudentList = () => {
   const [selectedStudent, setSelectedStudent] = useState(null);
   const [show, setShow] = useState(false);
   const [editShow, seteditShow] = useState(false);
-  const [submitText, setSubmitText] = useState("Add");
+  const [submitText, setSubmitText] = useState("Addd");
 
   const hideStudentForm = () => {
     setShow(false);
@@ -79,9 +79,9 @@ const StudentList = () => {
             })}
           </tbody>
         </table>
-        <button onClick={() => setSubmitText("Submit")}>change text</button>
+        <SubmitButton onClickHandeler={() => setSubmitText("Submit")} name={"change text"} className="btn btn-outline-warning btn-default" />
         {(!show ?
-          <SubmitButton onClickHandeler={showStudentForm} name={submitText} className="btn btn-outline-success btn-primary" />
+          <SubmitButton onClickHandeler={showStudentForm} name={submitText} className="btn btn-outline-success btn-default" />
           // <button type="submit" className="btn btn-outline-success btn-primary" onClick={showStudentForm} style={{ color: "white", marginBottom: '20px' }}>Add</button>
           :
           <AddStudent setStudentList={setStudentList} hideForm={hideStudentForm} />

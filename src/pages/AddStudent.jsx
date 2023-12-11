@@ -8,11 +8,17 @@ export default function AddStudent({ setStudentList, hideForm }) {
   const [streetTwo, setStreetTwo] = useState('');
   const [city, setCity] = useState('');
   const [pin, setPin] = useState('');
+  const [clock, setClock]=useState(0);
   useEffect(() => {
     console.log("I am mounted: AddStudent");
+    let interval = setInterval(() => {
+      setClock((cvalue)=>cvalue+1)
+    }, 1000);
     return () => {
+      interval = null;
       console.log("I will unmount:AddStudent");
     }
+  
   }, []);
 
   useEffect(() => {
@@ -55,6 +61,7 @@ export default function AddStudent({ setStudentList, hideForm }) {
 
   return (
     <div className="myForm">
+      <span>{clock}</span>
       <div className="row" style={{ marginBottom: '20px' }}>
         <div className="col">
           <label htmlFor="inputEmail4" className="form-label">Name</label>
