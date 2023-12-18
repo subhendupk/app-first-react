@@ -1,6 +1,8 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import AddStudent from "./AddStudent";
 import SubmitButton from "../components/SubmitButton";
+import { useNavigate } from "react-router-dom";
+import { getData } from "../utils/storageHelper";
 
 const StudentList = () => {
 
@@ -8,13 +10,22 @@ const StudentList = () => {
   const [selectedStudent, setSelectedStudent] = useState(null);
   const [show, setShow] = useState(false);
   const [editShow, seteditShow] = useState(false);
-  const [submitText, setSubmitText] = useState("Addd");
+  const [submitText, setSubmitText] = useState("Add");
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const allStudent = getData();
+    setStudentList(allStudent);
+  }, []);
 
   const hideStudentForm = () => {
     setShow(false);
   }
   const showStudentForm = () => {
-    setShow(true);
+    // setShow(true);
+    // navigate("/student-add", { state: { studentList: studentList } });
+    navigate("/student-add");
   }
   const openEditForm = (student) => {
     setSelectedStudent(student);
@@ -47,7 +58,7 @@ const StudentList = () => {
   // }
 
   return (
-    <div>
+    <div className="hello">
       <div className="container">
         <h3 className="text-center mt-3">
           This is StudentList

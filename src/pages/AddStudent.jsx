@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react'
+import { useLocation, useNavigate } from 'react-router-dom';
+import { getData, setData } from '../utils/storageHelper';
 
-export default function AddStudent({ setStudentList, hideForm }) {
+export default function AddStudent() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
@@ -8,18 +10,27 @@ export default function AddStudent({ setStudentList, hideForm }) {
   const [streetTwo, setStreetTwo] = useState('');
   const [city, setCity] = useState('');
   const [pin, setPin] = useState('');
-  const [clock, setClock]=useState(0);
+  const [clock, setClock] = useState(0);
+
+  // let location = useLocation();
+  const navigate = useNavigate();
+
   useEffect(() => {
     console.log("I am mounted: AddStudent");
     let interval = setInterval(() => {
-      setClock((cvalue)=>cvalue+1)
+      setClock((cvalue) => cvalue + 1)
     }, 1000);
+
     return () => {
-      interval = null;
+      // interval = null;
       console.log("I will unmount:AddStudent");
     }
-  
+
   }, []);
+
+  // useEffect(() => {
+  //   console.log("location", location);
+  // }, [location])
 
   useEffect(() => {
     console.log("I am updated:AddStudent");
@@ -39,24 +50,29 @@ export default function AddStudent({ setStudentList, hideForm }) {
       alert('Please Enter valid number');
     }
     else {
-      setStudentList((currentArray) => {
-        newStudent["id"] = currentArray.length + 1;
-        currentArray.push(newStudent);
-        return [...currentArray]
-      });
+      // setStudentList((currentArray) => {
+      //   newStudent["id"] = currentArray.length + 1;
+      //   currentArray.push(newStudent);
+      //   return [...currentArray]
+      // });
+      const allStudent = getData();
+      newStudent["id"] = allStudent.length + 1;
+      allStudent.push(newStudent);
+      setData(allStudent);
       closeForm();
     }
   }
 
   const closeForm = () => {
-    setName('');
-    setEmail('');
-    setPhone('');
-    setStreetOne('');
-    setStreetTwo('');
-    setCity('');
-    setPin('');
-    hideForm();
+    // setName('');
+    // setEmail('');
+    // setPhone('');
+    // setStreetOne('');
+    // setStreetTwo('');
+    // setCity('');
+    // setPin('');
+    // hideForm();
+    navigate("/");
   }
 
   return (
