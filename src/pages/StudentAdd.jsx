@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import { getData, setData } from "../utils/storageHelper";
+import { useNavigate } from "react-router-dom";
 
 const StudentAdd = ({ setStudentList, hideForm }) => {
 
@@ -9,6 +11,10 @@ const StudentAdd = ({ setStudentList, hideForm }) => {
     const [streetTwo, setStreetTwo] = useState('');
     const [city, setCity] = useState('');
     const [pin, setPin] = useState('');
+      
+    const navigate =useNavigate();
+
+ 
     useEffect(() => {
         console.log("i am munted");
         return () => {
@@ -16,9 +22,10 @@ const StudentAdd = ({ setStudentList, hideForm }) => {
         }
     }, []);
     useEffect(() => {
-        console.log("i am updated");
+        console.log("i am updated"); 
         
     }, [name,email]);
+
 
 
     const studentAdd = () => {
@@ -35,23 +42,28 @@ const StudentAdd = ({ setStudentList, hideForm }) => {
             alert('Please Enter valid number');
         }
         else {
-            setStudentList((currentArray) => {
-                newStudent["id"] = currentArray.length + 1;
-                currentArray.push(newStudent);
-                return [...currentArray]
-            });
+            // setStudentList((currentArray) => {
+            //     newStudent["id"] = currentArray.length + 1;
+            //     currentArray.push(newStudent);
+            //     return [...currentArray]
+            // });
+            const allstudent=getData();
+            newStudent["id"]=allstudent.length +1;
+            allstudent.push(newStudent);
+            setData(allstudent);
             closeForm();
         }
     }
     const closeForm = () => {
-        hideForm(false);
-        setName('');
-        setEmail('');
-        setPhone('');
-        setStreetOne('');
-        setStreetTwo('');
-        setCity('');
-        setPin('');
+        // hideForm(false);
+        // setName('');
+        // setEmail('');
+        // setPhone('');
+        // setStreetOne('');
+        // setStreetTwo('');
+        // setCity('');
+        // setPin('');
+        navigate("/");
     }
 
 

@@ -1,22 +1,43 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import StudentAdd from "./StudentAdd";
 import StudentEdit from "./StudentEdit";
+import { getData } from "../utils/storageHelper";
+import { useNavigate } from "react-router-dom";
 
 const StudentList = () => {
 
     const [studentList, setStudentList] = useState([]);
-    const [selectedStudent, setSelectedStudent] = useState(null);
+    // const [selectedStudent, setSelectedStudent] = useState(null);
     const [show, setShow] = useState(false);
     const [editShow, seteditShow] = useState(false);
     
+    const navigate =useNavigate();
+    
     const showStudentForm = () => {
-        setShow(true);
+        // setShow(true);
+        //navigate("/student-add",{state:{studentlist:studentlist}});
+        navigate("/student-add");
     }
-    const openEditForm = (student) => {
-        setSelectedStudent(student);
-        seteditShow(true);
+    const openEditForm = (studentId) => {
+       // send data using navigating state
+       // //navigate("/student-add",{state:{id:studentId}});
+        // setSelectedStudent(student);
+        // seteditShow(true);
+        
+        //send data in query params or
+        //navigate(`/studentEdit?id=${studentId}`);
+
+        //send data in path variable  or params 
+        //need to set path in route like path:""
+        navigate(`/studentEdit/${studentId}`);
+
+        //send data in path variable  or params 
     }
+    useEffect(() => {
+        const allstudent = getData();
+        setStudentList(allstudent);
+    }, []);
     
 
     return (
@@ -50,7 +71,7 @@ const StudentList = () => {
                                 <td>{student.streetTwo}</td>
                                 <td>{student.city}</td>
                                 <td>{student.pin}</td>
-                                <td><button type="button" onClick={() => openEditForm(student)} className="btn btn-primary">Edit</button></td>
+                                <td><button type="button" onClick={() => openEditForm(student.id)} className="btn btn-primary">Edit</button></td>
                             </tr>
                         })}
                     </tbody>
