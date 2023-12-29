@@ -1,4 +1,7 @@
 import { useState } from "react";
+import { getData, setData } from "../utils/storageHelper";
+import { Navigate, useNavigate } from "react-router";
+
 
 const StudentForm = ({ setStudentList, hideForm }) => {
     const [name, setName] = useState('');
@@ -11,9 +14,13 @@ const StudentForm = ({ setStudentList, hideForm }) => {
     const [errorName, setErrorName] = useState('');
     const [errorEmail, setErrorEmail] = useState('');
     const [errorPhone, setErrorPhone] = useState('');
+
+    const navigate = useNavigate();
     const closeForm = () => {
-        hideForm(false);
+        // hideForm(false);
+        navigate("/");
     }
+
     const validateForm = (newStudent) => {
         const emailVal = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
         let isValidForm = true;
@@ -21,11 +28,9 @@ const StudentForm = ({ setStudentList, hideForm }) => {
             setErrorName('Please Enter Valid Name');
             isValidForm = false;
         }
-
         if (!emailVal.test(newStudent.email)) {
             setErrorEmail('Please Enter Valid Email');
             isValidForm = false;
-
         }
         if (newStudent.phone.length !== 10 || !(newStudent.phone.startsWith('9') || newStudent.phone.startsWith('8') || newStudent.phone.startsWith('7') || newStudent.phone.startsWith('6'))) {
             setErrorPhone('Please enter a valid number');
@@ -36,12 +41,18 @@ const StudentForm = ({ setStudentList, hideForm }) => {
     const studentAdd = () => {
         const newStudent = { name, email, phone, streetOne, streetTwo, city, pin }
         if (validateForm(newStudent)) {
-            setStudentList((currentArray) => {
-                newStudent["id"] = currentArray.length + 1;
-                currentArray.push(newStudent);
-                return [...currentArray]
-            });
+            // setStudentList((currentArray) => {
+            //     newStudent["id"] = currentArray.length + 1;
+            //     currentArray.push(newStudent);
+            //     return [...currentArray]
+            // });
+            // closeForm();
+            const allStudent = getData();
+            newStudent['id'] = allStudent.length + 1;
+            allStudent.push(newStudent);
+            setData(allStudent);
             closeForm();
+
         }
     }
     return (

@@ -1,19 +1,36 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import StudentForm from "./StudentForm";
 import StudentEditForm from "./StudentEditForm";
+import { useNavigate } from "react-router";
+import { getData } from "../utils/storageHelper";
 
 const StudentTable = () => {
     const [studentList, setStudentList] = useState([]);
-    const [selectedStudent, setSelectedStudent] = useState(null);
     const [show, setShow] = useState(false);
     const [editShow, seteditShow] = useState(false);
 
+    const navigate = useNavigate();
+    useEffect(() => {
+        const allStudent = getData();
+        setStudentList(allStudent);
+    }, []);
+
     const showStudentForm = () => {
-        setShow(true);
+        // setShow(true);
+        navigate("/student-form");
     }
-    const openEditForm = (student) => {
-        setSelectedStudent(student);
-        seteditShow(true);
+
+    const openEditForm = (studentId) => {
+        // send data in  query string or search param
+        // navigate(`/student-editform?id=${studentId}`);
+
+
+        // send data in path varible or param
+        // NOTE: need to set path name in route like this path: "/student-editform/:id"
+        navigate(`/student-editform/${studentId}`);
+
+        // setSelectedStudent(student);
+        // seteditShow(true);
     }
 
     return (
@@ -24,18 +41,18 @@ const StudentTable = () => {
                 </h3>
                 <table className="table">
                     <thead>
-                        <tr className="table-dark">
+                        <tr className="table-dark text-center">
                             <th scope="col">E No.</th>
                             <th scope="col">Name</th>
                             <th scope="col">Email</th>
                             <th scope="col">Phone</th>
-                            <th scope="col" colSpan={4} style={{ textAlign: 'center' }}>Address</th>
+                            <th scope="col" colSpan={4}>Address</th>
                             <th scope="col">Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         {studentList.map((student, index) => {
-                            return <tr key={index}>
+                            return <tr key={index} className="text-center">
                                 <td>{index + 1}</td>
                                 <td>{student.name}</td>
                                 <td>{student.email}</td>
@@ -44,7 +61,7 @@ const StudentTable = () => {
                                 <td>{student.streetTwo}</td>
                                 <td>{student.city}</td>
                                 <td>{student.pin}</td>
-                                <td><button type="button" onClick={() => openEditForm(student)} className="btn btn-primary">Edit</button></td>
+                                <td><button type="button" onClick={() => openEditForm(student.id)} className="btn btn-primary">Edit</button></td>
                             </tr>
                         })}
                     </tbody>
