@@ -7,7 +7,6 @@ import { getData } from "../utils/storageHelper";
 const StudentList = () => {
 
   const [studentList, setStudentList] = useState([]);
-  const [selectedStudent, setSelectedStudent] = useState(null);
   const [show, setShow] = useState(false);
   const [editShow, seteditShow] = useState(false);
   const [submitText, setSubmitText] = useState("Add");
@@ -23,39 +22,19 @@ const StudentList = () => {
     setShow(false);
   }
   const showStudentForm = () => {
-    // setShow(true);
-    // navigate("/student-add", { state: { studentList: studentList } });
     navigate("/student-add");
   }
-  const openEditForm = (student) => {
-    setSelectedStudent(student);
-    seteditShow(true);
-  }
-  // const updateStudent = () => {
-  //   studentList.map((student, index) => {
-  //     if (student.id === selectedStudent.id) {
-  //       setStudentList((currentdata) => {
-  //         currentdata[index] = selectedStudent;
-  //         return [...currentdata];
-  //       })
-  //       updateCloseForm();
+  const openEditForm = (studentId) => {
+    // 1) Send data using navigate state
+    // navigate("/student-edit", { state: { id: studentId } });
 
-  //     }
-  //     else {
-  //       alert("Can't Update");
-  //     }
-  //   });
-  // }
-  // const updateCloseForm = () => {
-  //   seteditShow(false);
-  //   setName('');
-  //   setEmail('');
-  //   setPhone('');
-  //   setStreetOne('');
-  //   setStreetTwo('');
-  //   setCity('');
-  //   setPin('');
-  // }
+    // 2) Send data in query string or search param
+    // navigate(`/student-edit?id=${studentId}`);
+
+    // 3) Send data in path variable or param
+    // NOTE: need to to set path name in route like this  path: "/student-edit/:id"
+    navigate(`/student-edit/${studentId}`);
+  }
 
   return (
     <div className="hello">
@@ -85,7 +64,7 @@ const StudentList = () => {
                 <td>{student.streetTwo}</td>
                 <td>{student.city}</td>
                 <td>{student.pin}</td>
-                <td><button type="button" onClick={() => openEditForm(student)} className="btn btn-primary">Edit</button></td>
+                <td><button type="button" onClick={() => openEditForm(student.id)} className="btn btn-primary">Edit</button></td>
               </tr>
             })}
           </tbody>
@@ -97,90 +76,6 @@ const StudentList = () => {
           :
           <AddStudent setStudentList={setStudentList} hideForm={hideStudentForm} />
         )}
-        {/* {editShow ? (
-          <div className="myForm">
-            <div className="row" style={{ marginBottom: '20px' }}>
-              <div className="col">
-                <label htmlFor="inputEmail4" className="form-label">Name</label>
-                <input type="text" className="form-control" placeholder="Enter Name" value={selectedStudent.name} required
-                  onChange={(event) => {
-                    setSelectedStudent((currentValue) => {
-                      return { ...currentValue, ...{ name: event.target.value } };
-                    })
-                  }}
-                />
-              </div>
-              <div className="col">
-                <label htmlFor="inputEmail4" className="form-label">Email</label>
-                <input type="email" className="form-control" placeholder="Enter Email" value={selectedStudent.email} required
-                  onChange={(event) => {
-                    setSelectedStudent(currentValue => {
-                      return { ...currentValue, ...{ email: event.target.value } }
-                    })
-                  }}
-                />
-              </div>
-            </div>
-            <div className="row" style={{ marginBottom: '20px' }}>
-              <div className="col">
-                <label htmlFor="inputEmail4" className="form-label">Phone</label>
-                <input type="number" className="form-control" placeholder="Enter Number" value={selectedStudent.phone} required
-                  onChange={(event) => {
-                    setSelectedStudent(currentValue => {
-                      return { ...currentValue, ...{ phone: event.target.value } }
-                    });
-                  }}
-                />
-              </div>
-              <div className="col">
-                <label htmlFor="inputEmail4" className="form-label">Address Street 1</label>
-                <input type="text" className="form-control" placeholder="Enter Address Street 1" value={selectedStudent.streetOne}
-                  onChange={(event) => {
-                    setSelectedStudent(currentValue => {
-                      return { ...currentValue, ...{ streetOne: event.target.value } }
-                    });
-                  }}
-                />
-              </div>
-              <div className="col">
-                <label htmlFor="inputEmail4" className="form-label">Address Street 2</label>
-                <input type="text" className="form-control" placeholder="Enter Address Street 2" value={selectedStudent.streetTwo}
-                  onChange={(event) => {
-                    setSelectedStudent(currentValue => {
-                      return { ...currentValue, ...{ streetTwo: event.target.value } }
-                    });
-                  }}
-                />
-              </div>
-            </div>
-            <div className="row" style={{ marginBottom: '20px' }}>
-              <div className="col">
-                <label htmlFor="inputEmail4" className="form-label">City</label>
-                <input type="text" className="form-control" placeholder="Enter City" value={selectedStudent.city}
-                  onChange={(event) => {
-                    setSelectedStudent(currentValue => {
-                      return { ...currentValue, ...{ city: event.target.value } }
-                    });
-                  }}
-
-                />
-              </div>
-              <div className="col">
-                <label htmlFor="inputEmail4" className="form-label">PinCode</label>
-                <input type="number" className="form-control" placeholder="Enter Pincode" value={selectedStudent.pin}
-                  onChange={(event) => {
-                    setSelectedStudent(currentValue => {
-                      return { ...currentValue, ...{ pin: event.target.value } }
-                    });
-                  }}
-                />
-              </div>
-            </div>
-            <button type="button" className="btn btn-success" style={{ marginRight: '10px' }} onClick={updateStudent}>Update</button>
-            <button type="button" className="btn btn-danger" onClick={updateCloseForm}>Cancel</button>
-          </div>
-        ) : null} */}
-
       </div>
     </div>
   )
