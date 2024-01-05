@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import StudentForm from "./StudentForm";
 import StudentEditForm from "./StudentEditForm";
 import { useNavigate } from "react-router";
-import { getData } from "../utils/storageHelper";
+import { getData, setData } from "../utils/storageHelper";
 
 const StudentTable = () => {
     const [studentList, setStudentList] = useState([]);
@@ -32,6 +32,20 @@ const StudentTable = () => {
         // setSelectedStudent(student);
         // seteditShow(true);
     }
+    const deleteStudent = (studentId) => {
+        const updatedStudent = studentList.filter((student) => {
+            return student.id !== studentId;
+        })
+        let text = "You are sure?"
+        if (window.confirm(text)) {
+            setData(updatedStudent);
+            setStudentList(updatedStudent);
+            navigate('/');
+        }
+        else {
+            navigate('/');
+        }
+    }
 
     return (
         <div>
@@ -47,7 +61,7 @@ const StudentTable = () => {
                             <th scope="col">Email</th>
                             <th scope="col">Phone</th>
                             <th scope="col" colSpan={4}>Address</th>
-                            <th scope="col">Action</th>
+                            <th scope="col" colSpan={2}>Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -62,6 +76,10 @@ const StudentTable = () => {
                                 <td>{student.city}</td>
                                 <td>{student.pin}</td>
                                 <td><button type="button" onClick={() => openEditForm(student.id)} className="btn btn-primary">Edit</button></td>
+                                <td><button className="btn btn-danger" onClick={() => {
+                                    deleteStudent(student.id)
+                                }}>Delete</button></td>
+
                             </tr>
                         })}
                     </tbody>
