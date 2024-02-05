@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { getData, setData } from "../utils/storageHelper";
 import { Navigate, useNavigate } from "react-router";
+import { addStudent } from "../redux/reducers/studentSlice";
+import { useDispatch } from "react-redux";
 
 
 const StudentForm = ({ setStudentList, hideForm }) => {
@@ -16,6 +18,7 @@ const StudentForm = ({ setStudentList, hideForm }) => {
     const [errorPhone, setErrorPhone] = useState('');
 
     const navigate = useNavigate();
+    const dispatch = useDispatch();
     const closeForm = () => {
         // hideForm(false);
         navigate("/");
@@ -47,12 +50,12 @@ const StudentForm = ({ setStudentList, hideForm }) => {
             //     return [...currentArray]
             // });
             // closeForm();
-            const allStudent = getData();
-            newStudent['id'] = allStudent.length + 1;
-            allStudent.push(newStudent);
-            setData(allStudent);
+            // const allStudent = getData();
+            // newStudent['id'] = allStudent.length + 1;
+            // allStudent.push(newStudent);
+            // setData(allStudent);
+            dispatch(addStudent(newStudent));
             closeForm();
-
         }
     }
     return (

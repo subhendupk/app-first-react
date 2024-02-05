@@ -3,17 +3,18 @@ import StudentForm from "./StudentForm";
 import StudentEditForm from "./StudentEditForm";
 import { useNavigate } from "react-router";
 import { getData, setData } from "../utils/storageHelper";
+import { useSelector } from "react-redux";
 
 const StudentTable = () => {
-    const [studentList, setStudentList] = useState([]);
+    // const [studentList, setStudentList] = useState([]);
     const [show, setShow] = useState(false);
     const [editShow, seteditShow] = useState(false);
-
+    const studentList = useSelector((state) => state.allstudents)
     const navigate = useNavigate();
-    useEffect(() => {
-        const allStudent = getData();
-        setStudentList(allStudent);
-    }, []);
+    // useEffect(() => {
+    //     const allStudent = getData();
+    //     setStudentList(allStudent);
+    // }, []);
 
     const showStudentForm = () => {
         // setShow(true);
